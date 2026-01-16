@@ -107,12 +107,12 @@
 %%% Blocks %%%
 \newenvironment{generalcomment}{%
 	\edef\@currentlabel{General Comment}
-	\begin{tcolorbox}[adjusted title={General Comment}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=0pt,boxrule=0em,opacityframe=0,colback={colorcommentbg}]
+	\begin{tcolorbox}[adjusted title={General Comment}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=3pt,boxrule=0em,opacityframe=0,colback={colorcommentbg},drop fuzzy shadow]
 		}{\end{tcolorbox}}
 
 \newenvironment{revcomment}[1][]{\refstepcounter{reviewcomment@counter}
 	\edef\@currentlabel{Comment \arabic{reviewer@counter}.\arabic{reviewcomment@counter}}
-	\begin{tcolorbox}[adjusted title={Comment \arabic{reviewer@counter}.\arabic{reviewcomment@counter}}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=0pt,opacityframe=0,boxrule=0em,colback={colorcommentbg},#1]
+	\begin{tcolorbox}[adjusted title={Comment \arabic{reviewer@counter}.\arabic{reviewcomment@counter}}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=3pt,opacityframe=0,boxrule=0em,colback={colorcommentbg},drop fuzzy shadow,#1]
 		}{\end{tcolorbox}}
 
 \newenvironment{revresponse}[1][{Thank you for the comment.}]{%

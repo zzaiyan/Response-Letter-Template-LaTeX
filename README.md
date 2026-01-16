@@ -2,6 +2,47 @@
 
 This repository is adapted from [Karl-Ludwig Besser's template](https://www.overleaf.com/latex/templates/review-response-template/tmbvmjstxwrd), which provides a simple LaTeX template for writing responses to reviewers. You may preview the PDF file [here](https://shellywhen.github.io/Journal-Response-Letter-Template-Latex/Review_Response_Template.pdf)
 
+## Recent Updates
+
+### Version 2.0 (January 2026)
+
+**Major Improvements:**
+
+1. **Bibliography System Migration**
+   - Migrated from `biblatex+biber` to `natbib+bibtex` for better compatibility
+   - Now uses `IEEEtran` bibliography style
+   - Compilation workflow: `pdflatex → bibtex → pdflatex → pdflatex`
+
+2. **Enhanced Cover Letter Layout**
+   - Merged cover letter with title page for better space utilization
+   - Added professional formatted table displaying manuscript information (Manuscript ID, Title, Authors)
+   - Optimized spacing: 0.8cm above table, 0.3em table padding, 1.2em below horizontal rule
+
+3. **Fixed General Comment Handling**
+   - General comments no longer increment the comment counter
+   - General responses now correctly labeled as "General Response:" (instead of "Response S0")
+   - Proper indentation control with `\noindent` for consistent formatting
+
+4. **Flexible Editor Command**
+   - `\editor` command now accepts optional parameter for custom titles
+   - Usage: `\editor[Associate Editor]` or `\editor[Action Editor]`
+   - Default remains "Meta Review" for backward compatibility
+
+5. **Visual Enhancements**
+   - Added 3pt rounded corners to comment boxes for softer appearance
+   - Applied drop fuzzy shadow effect for smooth gradient transitions
+   - Improved typography with 2em paragraph indentation (English academic standard)
+
+6. **Project Management**
+   - Added comprehensive `.gitignore` file with 170+ LaTeX-specific patterns
+   - Excludes auxiliary files (aux, log, bbl, blg, synctex, etc.)
+   - PDF files allowed for template examples
+
+**Bug Fixes:**
+- Resolved `\citep` undefined control sequence error
+- Fixed `\printpartbibliography` compatibility issues with bibtex
+- Corrected comment numbering sequence (now starts correctly at 1.1 after general comments)
+
 # Usage
 
 In order to use the `reviewresponse.sty` package in your document, simply include the following line
@@ -20,10 +61,16 @@ found [here](https://gist.github.com/klb2/29f6fffeac8cc79e3b3f79e980a6b9e3).
 
 ### Editor and Reviewers
 ```latex
-\editor
+\editor[optional title]
 \reviewer
 ```
 These commands start a new editor and reviewer.
+
+**Editor Command:**
+- Accepts optional parameter for custom title (new in v2.0)
+- Examples: `\editor[Associate Editor]`, `\editor[Action Editor]`
+- Default: `\editor` displays "Meta Review"
+
 The typical usage is
 ```latex
 \begin{document}
@@ -45,7 +92,15 @@ Response to the second reviewer
 \end{generalcomment}
 ```
 The `generalcomment` environment is meant for general comments given by the
-editor and reviewers.
+editor and reviewers. General comments do not increment the comment counter (fixed in v2.0), ensuring numbered comments start correctly at X.1.
+
+**Response to General Comments:**
+```latex
+\begin{revmeta}[Optional Parameter]
+...
+\end{revmeta}
+```
+Use `revmeta` environment for responses to general comments. It displays as "General Response:" with proper formatting.
 
 
 
@@ -88,20 +143,41 @@ It sets the content in a box in order to highlight it for the reviewers.
 
 
 ### Bibliography
-The `reviewresponse` package supports the use of `biblatex` for references.
-Simply include `biblatex` and use the `\cite` command in your response.
+The `reviewresponse` package now uses `natbib` for references (migrated from `biblatex` in v2.0).
 
-If you want to print specific references, e.g., at the end of the response to
-one particular comment, you can use the `\printpartbibliography` command.
+**Setup:**
 ```latex
-\printpartbibliography{bibkey1,bibkey2,...}
+\usepackage[numbers,sort&compress]{natbib}
+\bibliographystyle{IEEEtran}
+...
+\bibliography{literature}  % at the end of document
 ```
+
+**Citation Commands:**
+- Use `\citep{}` for parenthetical citations: (Author, Year)
+- Use `\citet{}` for textual citations: Author (Year)
+- Use `\cite{}` for numeric citations: [1]
+
+**Compilation:**
+```bash
+pdflatex review_response.tex
+bibtex review_response
+pdflatex review_response.tex
+pdflatex review_response.tex
+```
+
+**Note:** The `\printpartbibliography` command from biblatex is no longer supported. All citations will appear in the main bibliography at the end of the document.
 
 
 
 ### Customization
 You can customize the appearance of all the boxes in the `reviewresponse.sty`
 file.
+
+**Visual Style (v2.0):**
+- Comment boxes feature 3pt rounded corners (`arc=3pt`)
+- Soft gradient shadow effect (`drop fuzzy shadow`)
+- Enhanced visual hierarchy with professional appearance
 
 If you only want to change the colors of the boxes, you need to redefine the
 following colors.
@@ -114,3 +190,8 @@ The shown values are the defaults.
 \colorlet{colorchangebg}{black!2} % color of the background of the changes box
 \colorlet{colorchangeframe}{black!20} % color of the frame of the changes box
 ```
+
+**Typography:**
+- Paragraph indentation: 2em (English academic standard)
+- Paragraph skip: 0.25em
+- Uses Fourier font (Utopia family) for elegant appearance
