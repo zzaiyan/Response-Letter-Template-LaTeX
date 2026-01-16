@@ -46,7 +46,7 @@
 
 
 %%% General Settings
-\setlength{\parindent}{12pt}
+\setlength{\parindent}{2em}
 \setlength{\parskip}{.25em}
 \setlength{\headheight}{15pt}
 \addtolength{\topmargin}{-3pt}
@@ -64,31 +64,34 @@
 
 %%% Commands
 \renewcommand*{\maketitle}{%
-	\begin{titlepage}
-		\begin{center}
-			\vspace*{1cm}
-			\large{Responses to Reviewers' Comments for Manuscript \reviewresponse@manuscript}\\
+	\thispagestyle{empty}
+	\begin{center}
+		\vspace*{0.3em}
+		\textbf{\Large{Cover Letter (\reviewresponse@manuscript)}}\\
+		\vspace{1em}
+		{\large\reviewresponse@journal}\\
+		\vspace{0.5em}
+	\end{center}
 
-			\vspace{1cm}
-			\textbf{\LARGE{\@title}}\\
-			\vspace{1cm}
-			\large{Addressed Comments for Publication to}
-
-			\Large{\reviewresponse@journal}
-
-			\large{by}
-
-			{\large{\@author}}
-		\end{center}
-	\end{titlepage}
+	\noindent\rule{\textwidth}{0.7pt}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.2}
+		\begin{tabular}{@{}p{0.25\textwidth}p{0.7\textwidth}@{}}
+			\textbf{Manuscript ID:}    & \reviewresponse@manuscript \\
+			\textbf{Manuscript Title:} & \@title                    \\
+			\textbf{Authors:}          & \@author                   \\
+		\end{tabular}
+	\end{center}
+	\noindent\rule{\textwidth}{0.7pt}
+	\vspace{0.5em}
 }
 
-\newcommand{\editor}{
+\newcommand{\editor}[1][Meta Review]{
 	\clearpage
 	\@ifundefined{pdfbookmark}{}{%
-		\pdfbookmark[1]{Reponse to the Meta Review}{hyperref@editor}%
+		\pdfbookmark[1]{Response to the #1}{hyperref@editor}%
 	}%
-	\section*{\textbf{Response to the Meta Review}}
+	\section*{\textbf{Response to the #1}}
 }
 
 \newcommand{\reviewer}{
@@ -103,9 +106,8 @@
 
 %%% Blocks %%%
 \newenvironment{generalcomment}{%
-	\refstepcounter{reviewcomment@counter}
-	\edef\@currentlabel{Summary Comment \arabic{reviewcomment@counter}}
-	\begin{tcolorbox}[adjusted title={Summary Comment \arabic{reviewcomment@counter}}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=0pt,boxrule=0em,opacityframe=0,colback={colorcommentbg}]
+	\edef\@currentlabel{General Comment}
+	\begin{tcolorbox}[adjusted title={General Comment}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=0pt,boxrule=0em,opacityframe=0,colback={colorcommentbg}]
 		}{\end{tcolorbox}}
 
 \newenvironment{revcomment}[1][]{\refstepcounter{reviewcomment@counter}
@@ -119,8 +121,8 @@
 }{\vspace{1em}}
 
 \newenvironment{revmeta}[1][{Thank you for the comment.}]{%
-	\edef\@currentlabel{Response S\arabic{reviewcomment@counter}}
-	\textbf{Response S\arabic{reviewcomment@counter}:} #1\par
+	\edef\@currentlabel{General Response}
+	\noindent\textbf{General Response:} #1\par
 }{\vspace{1em}}
 
 \newenvironment{changes}{
