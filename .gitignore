@@ -1,0 +1,199 @@
+# LaTeX intermediate files
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# Bibliography auxiliary files
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# Build tool auxiliary files
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# Build tool directories
+**/auto/
+
+# Auxiliary and intermediate files for hyperref package
+*.brf
+
+# Auxiliary files for natbib
+*.nav
+*.snm
+*.vrb
+
+# Glossaries
+*.acn
+*.acr
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.lzo
+*.lzs
+
+# Index files
+*.idx
+*.ilg
+*.ind
+
+# Nomenclature
+*.nlo
+*.nls
+
+# Endnotes
+*.ent
+
+# Fixme
+*.lox
+
+# Acronyms
+*.alg
+*.loa
+
+# Listings
+*.lol
+
+# Makeindex log files
+*.lpz
+
+# Multicolumn layout
+*.cut
+
+# Minted (code highlighting)
+_minted*
+*.pyg
+
+# Pythontex
+*.pytxcode
+pythontex-files-*/
+
+# TikZ & PGF
+*.dpth
+*.md5
+*.auxlock
+
+# Todonotes
+*.tdo
+
+# XY-pic
+*.xyc
+
+# Beamer
+*.nav
+*.pre
+*.snm
+*.vrb
+
+# Changes package
+*.soc
+
+# Comment package
+*.cut
+
+# Enumitem
+*.upa
+
+# Exam class
+*.ans
+
+# Gnuplot
+*.gnuplot
+*.table
+
+# Glossaries
+*.xdy
+
+# Gnuplottex
+*-gnuplottex-*
+
+# Gregoriotex
+*.gaux
+*.gtex
+
+# Htlatex
+*.4ct
+*.4tc
+*.idv
+*.lg
+*.trc
+*.xref
+
+# Hyperref
+*.brf
+
+# Knitr
+*-concordance.tex
+
+# Sagetex
+*.sagetex.sage
+*.sagetex.py
+*.sagetex.scmd
+
+# Scrwfile
+*.wrt
+
+# Sympy
+*.sout
+*.sympy
+sympy-plots-for-*.tex/
+
+# Pdfcomment
+*.upa
+*.upb
+
+# Pythontex
+*.pytxcode
+pythontex-files-*/
+
+# Tcolorbox
+*.listing
+
+# TikZ externalize
+*.figlist
+*.makefile
+*.dpth
+*.md5
+*.log
+
+# Todonotes
+*.tdo
+
+# Xindy
+*.xdy
+
+# Output PDF (optional - uncomment if you don't want to track PDFs)
+# *.pdf
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor backup files
+*~
+*.swp
+*.swo
+*.bak
+*.backup
