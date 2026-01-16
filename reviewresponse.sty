@@ -31,17 +31,17 @@
 \newcommand*{\thedate}{\@date}
 
 %%% Colors
-\definecolor{colorcommentfg}{HTML}{336633}
+% \definecolor{colorcommentfg}{HTML}{6B9FD7}
 \definecolor{colorcommentbg}{HTML}{ededed}
-\definecolor{colorcommentframe}{HTML}{336633}
+\definecolor{colorcommentframe}{HTML}{6B9FD7}
 %\definecolor{colordark}{RGB}{0,63,87}
 %\definecolor{colormedium}{RGB}{0,112,155}
 %\definecolor{colorlight}{RGB}{102,180,211}
 %\colorlet{colorcommentbg}{colorlight!20}
 
-\definecolor{colorchangebg}{HTML}{e5f9de}
+\definecolor{colorchangebg}{HTML}{FFB480}
 \definecolor{colorchangetext}{HTML}{424242}
-\colorlet{colorchangeframe}{black!20}
+% \colorlet{colorchangeframe}{black!20}
 %%%
 
 
@@ -75,12 +75,14 @@
 
 	\noindent\rule{\textwidth}{0.7pt}
 	\begin{center}
+		\vspace{-0.7em}
 		\renewcommand{\arraystretch}{1.2}
-		\begin{tabular}{@{}p{0.25\textwidth}p{0.7\textwidth}@{}}
+		\begin{tabular}{@{}p{0.2\textwidth}p{0.75\textwidth}@{}}
 			\textbf{Manuscript ID:}    & \reviewresponse@manuscript \\
 			\textbf{Manuscript Title:} & \@title                    \\
 			\textbf{Authors:}          & \@author                   \\
 		\end{tabular}
+		\vspace{-0.7em}
 	\end{center}
 	\noindent\rule{\textwidth}{0.7pt}
 	\vspace{0.5em}
