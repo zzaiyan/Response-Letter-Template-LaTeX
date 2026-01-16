@@ -1,6 +1,6 @@
 # LaTeX Template for Review Responses
 
-This repository is adapted from [Karl-Ludwig Besser's template](https://www.overleaf.com/latex/templates/review-response-template/tmbvmjstxwrd), which provides a simple LaTeX template for writing responses to reviewers. You may preview the PDF file [here](https://shellywhen.github.io/Journal-Response-Letter-Template-Latex/Review_Response_Template.pdf)
+This repository is adapted from [Karl-Ludwig Besser's template](https://www.overleaf.com/latex/templates/review-response-template/tmbvmjstxwrd), which provides a simple LaTeX template for writing responses to reviewers. You may preview the PDF file [here](review_response.pdf)
 
 ## Recent Updates
 
@@ -33,10 +33,20 @@ This repository is adapted from [Karl-Ludwig Besser's template](https://www.over
    - Applied drop fuzzy shadow effect for smooth gradient transitions
    - Improved typography with 2em paragraph indentation (English academic standard)
 
-6. **Project Management**
+6. **Customizable Default Responses**
+   - Added `\setdefaultmetaresponse` command to customize default general response text
+   - Added `\setdefaultresponse` command to customize default comment response text
+   - Allows consistent response templates throughout the document
+
+7. **Manual Reviewer Numbering**
+   - `\reviewer` command now accepts optional parameter to manually specify reviewer number
+   - Useful for responding to specific reviewer assignments or non-sequential numbering
+
+8. **Project Management**
    - Added comprehensive `.gitignore` file with 170+ LaTeX-specific patterns
    - Excludes auxiliary files (aux, log, bbl, blg, synctex, etc.)
    - PDF files allowed for template examples
+   - Removed "REFERENCES" header from bibliography page for cleaner appearance
 
 **Bug Fixes:**
 - Resolved `\citep` undefined control sequence error
@@ -62,7 +72,7 @@ found [here](https://gist.github.com/klb2/29f6fffeac8cc79e3b3f79e980a6b9e3).
 ### Editor and Reviewers
 ```latex
 \editor[optional title]
-\reviewer
+\reviewer[optional number]
 ```
 These commands start a new editor and reviewer.
 
@@ -70,6 +80,11 @@ These commands start a new editor and reviewer.
 - Accepts optional parameter for custom title (new in v2.0)
 - Examples: `\editor[Associate Editor]`, `\editor[Action Editor]`
 - Default: `\editor` displays "Meta Review"
+
+**Reviewer Command:**
+- Accepts optional parameter to manually specify reviewer number (new in v2.0)
+- Examples: `\reviewer` (auto-increment), `\reviewer[3]` (set to Reviewer 3)
+- Useful for non-sequential reviewer assignments or specific numbering requirements
 
 The typical usage is
 ```latex
@@ -83,9 +98,23 @@ Response to the first reviewer
 
 \reviewer
 Response to the second reviewer
+
+\reviewer[5]
+Response to Reviewer 5 (manual numbering)
 ```
 
 ### Comments and Responses
+
+**Customizing Default Response Text:**
+```latex
+% Set at the beginning of your document
+\setdefaultmetaresponse{We sincerely appreciate your guidance.}
+\setdefaultresponse{We thank the reviewer for this valuable feedback.}
+```
+- `\setdefaultmetaresponse`: Sets the default opening text for general responses (`\revmeta`)
+- `\setdefaultresponse`: Sets the default opening text for numbered responses (`\revresponse`)
+- If not set, both default to "Thank you for the comment."
+
 ```latex
 \begin{generalcomment}
 ...
@@ -101,6 +130,8 @@ editor and reviewers. General comments do not increment the comment counter (fix
 \end{revmeta}
 ```
 Use `revmeta` environment for responses to general comments. It displays as "General Response:" with proper formatting.
+- Optional parameter overrides the default response text set by `\setdefaultmetaresponse`
+- If omitted, uses the global default ("Thank you for the comment." if not customized)
 
 
 
@@ -126,8 +157,9 @@ the `breakable` keyword for very long comments.
 ```
 The `revresponse` environment is meant for responses to the individual comments
 of the reviewers and editor.
-The optional parameter changes the text on the first line.
-By default, this text is "Thank you for the comment.".
+- Optional parameter overrides the default response text set by `\setdefaultresponse`
+- If omitted, uses the global default ("Thank you for the comment." if not customized)
+- The optional parameter changes the text on the first line
 
 
 
@@ -171,6 +203,14 @@ pdflatex review_response.tex
 
 
 ### Customization
+
+**Default Response Text:**
+```latex
+% Place these commands at the beginning of your document, after \begin{document}
+\setdefaultmetaresponse{We appreciate your handling of the review process.}
+\setdefaultresponse{We thank you for this valuable comment.}
+```
+
 You can customize the appearance of all the boxes in the `reviewresponse.sty`
 file.
 

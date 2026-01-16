@@ -1,4 +1,4 @@
-\ProvidesPackage{reviewresponse}[2021/11/10 Review Response v1.2]
+\ProvidesPackage{reviewresponse}[2026/1/16 Review Response v2.0]
 % Author: Karl-Ludwig Besser
 % Email: k.besser@tu-bs.de
 
@@ -10,6 +10,19 @@
 %   - section title inconsistency
 %   - diff color in the change environment @KarlRaphel
 % - support good reference
+
+% Updated by Zaiyan Zhang (1@zzaiyan.com)
+% Summary of changes:
+% - Bibliography: migrated from biblatex+biber to natbib+bibtex (IEEEtran style)
+% - Cover page: merged with cover letter, added formatted info table
+% - General comments: fixed counter behavior (no longer increments)
+% - General response: fixed label display (now "General Response:")
+% - \editor command: added optional parameter for custom titles (e.g., [Associate Editor])
+% - \reviewer command: added optional parameter for manual numbering (e.g., [3])
+% - Visual: added 3pt rounded corners and fuzzy shadow to comment boxes
+% - Typography: standardized paragraph indent to 2em, optimized spacing
+% - Customization: added \setdefaultmetaresponse and \setdefaultresponse commands
+% - Bibliography page: removed "REFERENCES" header for cleaner appearance
 
 \RequirePackage{kvoptions}
 \RequirePackage[breakable,skins]{tcolorbox}
@@ -29,6 +42,14 @@
 \newcommand*{\thetitle}{\@title}
 \newcommand*{\theauthor}{\@author}
 \newcommand*{\thedate}{\@date}
+
+% Default response texts
+\newcommand{\defaultmetaresponse}{Thank you for the comment.}
+\newcommand{\defaultresponse}{Thank you for the comment.}
+
+% Commands to customize default responses
+\newcommand{\setdefaultmetaresponse}[1]{\renewcommand{\defaultmetaresponse}{#1}}
+\newcommand{\setdefaultresponse}[1]{\renewcommand{\defaultresponse}{#1}}
 
 %%% Colors
 % \definecolor{colorcommentfg}{HTML}{6B9FD7}
@@ -98,9 +119,13 @@
 	\section*{\textbf{Response to the #1}}
 }
 
-\newcommand{\reviewer}{
+\newcommand{\reviewer}[1][]{
 	\clearpage
-	\refstepcounter{reviewer@counter}%
+	\ifx\relax#1\relax
+		\refstepcounter{reviewer@counter}%
+	\else
+		\setcounter{reviewer@counter}{#1}%
+	\fi
 	\@ifundefined{pdfbookmark}{}{%
 		\pdfbookmark[1]{Reviewer \arabic{reviewer@counter}}{hyperref@reviewer\arabic{reviewer@counter}}%
 	}%
@@ -119,12 +144,12 @@
 	\begin{tcolorbox}[adjusted title={Comment \arabic{reviewer@counter}.\arabic{reviewcomment@counter}}, fonttitle={\bfseries}, enhanced jigsaw, colbacktitle={colorcommentframe},arc=3pt,opacityframe=0,boxrule=0em,colback={colorcommentbg},drop fuzzy shadow,#1]
 		}{\end{tcolorbox}}
 
-\newenvironment{revresponse}[1][{Thank you for the comment.}]{%
+\newenvironment{revresponse}[1][\defaultresponse]{%
 	\edef\@currentlabel{Response \arabic{reviewer@counter}.\arabic{reviewcomment@counter}}
 	\noindent\textbf{Response \arabic{reviewer@counter}.\arabic{reviewcomment@counter}:} #1\par
 }{\vspace{1em}}
 
-\newenvironment{revmeta}[1][{Thank you for the comment.}]{%
+\newenvironment{revmeta}[1][\defaultmetaresponse]{%
 	\edef\@currentlabel{General Response}
 	\noindent\textbf{General Response:} #1\par
 }{\vspace{1em}}
